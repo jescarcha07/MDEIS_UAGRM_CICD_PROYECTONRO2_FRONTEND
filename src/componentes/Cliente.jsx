@@ -1,24 +1,10 @@
 import { useEffect, useState } from "react";
 import {Operaciones} from '../service'
 import config from '../config'
+import { useNavigate } from "react-router-dom";
 
 
 
-function CargarDatos(){
-  const oper=new Operaciones();
-  oper.Consultar(config.apiUrl+ '/api/cliente')
-  .then((rescargo) => {
-    if (rescargo.data._error.error === 0) {
-        this.lstcargo = rescargo.data._data;
-        this.dialog = false;
-    } else {
-        console.log("prueba");
-    }
-}).catch((error) => {
-      console.log(error);
-});
-
-}
 
 function Cliente() {
   const [cliente, setCliente] = useState({
@@ -31,23 +17,24 @@ function Cliente() {
     tipoCliente: "",
     direccion: "",
   });
+  const operaciones = new Operaciones();
+  const navigate = useNavigate();
   
-  useEffect(() => {
-    console.log('Formulario cargado');
-    // Aquí puedes agregar cualquier lógica para inicializar el formulario
-    // como cargar datos, establecer valores por defecto, etc.
-    CargarDatos()
-  }, []); // El array vacío asegura que
-
-
   const handleChange = (e) => {
     setCliente({ ...cliente, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Cliente Registrado:", cliente);
-    alert("Cliente registrado con éxito!");
+    try {
+      const url = `${config.apiUrl}/clientes`;
+      await operaciones.Insertar(url, cliente);
+      alert("Cliente registrado con éxito!");
+      navigate("/lista-cliente"); // Redirigir a la lista de productos
+    } catch (error) {
+      console.error("Error registrando el cliente:", error);
+      alert("Hubo un error al registrar el cliente.");
+    }
   };
 
   return (
