@@ -5,6 +5,9 @@ import Cliente from "./componentes/Cliente";
 import Empleado from "./componentes/Empleado";
 import Producto from "./componentes/Producto";
 import ListaClientes from "./componentes/ListaClientes";
+import ListaProductos from "./componentes/ListaProducto";
+
+
 function App() {
   return (
     <div>
@@ -12,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/registrar-cliente" element={<Cliente />} />
         <Route path="/registrar-producto" element={<Producto />} />
+        <Route path="/lista-productos" element={<ListaProductos />} />
         <Route path="/registrar-empleado" element={<Empleado />} />
         <Route path="/lista-clientes" element={<ListaClientes />} />
       </Routes>

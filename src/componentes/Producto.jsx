@@ -1,4 +1,7 @@
 import { useState } from "react";
+import {Operaciones} from '../service'
+import config from '../config'
+import { useNavigate } from "react-router-dom";
 
 function Producto() {
   const [producto, setProducto] = useState({
@@ -12,15 +15,25 @@ function Producto() {
     estado: "",
   });
 
+  const operaciones = new Operaciones();
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setProducto({ ...producto, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Producto Registrado:", producto);
-    alert("Producto registrado con éxito!");
+    try {
+      const url = `${config.apiUrl}/productos`;
+      await operaciones.Insertar(url, producto);
+      alert("Producto registrado con éxito!");
+      navigate("/lista-productos"); // Redirigir a la lista de productos
+    } catch (error) {
+      console.error("Error registrando el producto:", error);
+      alert("Hubo un error al registrar el producto.");
+    }
   };
+
 
   return (
     <div className="container mt-4">
