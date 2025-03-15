@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {Operaciones} from '../service'
 import config from '../config'
 import { useNavigate } from "react-router-dom";
