@@ -1,6 +1,6 @@
 const config = {
-    apiUrl: "https://api.example.com",
-    appName: "MDEIS_UAGRM_CICD_PROYECTONRO2_FRONTEND"
+    apiUrl: "http://localhost:8800/api",
+    appName: "MyReactApp"
   };
   
   export default config;

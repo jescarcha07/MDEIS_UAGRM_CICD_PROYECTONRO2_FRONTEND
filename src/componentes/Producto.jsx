@@ -1,22 +1,23 @@
 import { useState } from "react";
-import {Operaciones} from '../service'
-import config from '../config'
+import { Operaciones } from "../service";
+import config from "../config";
 import { useNavigate } from "react-router-dom";
 
 function Producto() {
   const [producto, setProducto] = useState({
-    nombre: "",
-    descripcion: "",
-    marca: "",
-    categoria: "",
-    precio: "",
-    stock: "",
-    codigo: "",
-    estado: "",
+    name: "",
+    description: "",
+    brand: "",
+    category: "",
+    price: "",
+    stock: ""
+    /*codigo: "",
+    estado: "",*/
   });
 
   const operaciones = new Operaciones();
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setProducto({ ...producto, [e.target.name]: e.target.value });
   };
@@ -24,7 +25,7 @@ function Producto() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `${config.apiUrl}/productos`;
+      const url = `${config.apiUrl}/products`;
       await operaciones.Insertar(url, producto);
       alert("Producto registrado con éxito!");
       navigate("/lista-productos"); // Redirigir a la lista de productos
@@ -34,47 +35,34 @@ function Producto() {
     }
   };
 
-
   return (
     <div className="container mt-4">
       <h2 className="text-center">Registro de Producto</h2>
       <form onSubmit={handleSubmit} className="border p-4 rounded shadow">
         <div className="row g-3">
           <div className="col-md-6">
-            <label className="form-label">Nombre:</label>
-            <input type="text" className="form-control" name="nombre" value={producto.nombre} onChange={handleChange} required />
+            <label htmlFor="name" className="form-label">Nombre:</label>
+            <input type="text" id="name" className="form-control" name="name" value={producto.name} onChange={handleChange} required />
           </div>
           <div className="col-md-6">
-            <label className="form-label">Descripción:</label>
-            <input type="text" className="form-control" name="descripcion" value={producto.descripcion} onChange={handleChange} required />
+            <label htmlFor="description" className="form-label">Descripción:</label>
+            <input type="text" id="description" className="form-control" name="description" value={producto.description} onChange={handleChange} required />
           </div>
           <div className="col-md-6">
-            <label className="form-label">Marca:</label>
-            <input type="text" className="form-control" name="marca" value={producto.marca} onChange={handleChange} required />
+            <label htmlFor="brand" className="form-label">Marca:</label>
+            <input type="text" id="brand" className="form-control" name="brand" value={producto.brand} onChange={handleChange} required />
           </div>
           <div className="col-md-6">
-            <label className="form-label">Categoría:</label>
-            <input type="text" className="form-control" name="categoria" value={producto.categoria} onChange={handleChange} required />
+            <label htmlFor="category" className="form-label">Categoría:</label>
+            <input type="text" id="category" className="form-control" name="category" value={producto.category} onChange={handleChange} required />
           </div>
           <div className="col-md-6">
-            <label className="form-label">Precio:</label>
-            <input type="number" className="form-control" name="precio" value={producto.precio} onChange={handleChange} required />
+            <label htmlFor="price" className="form-label">Precio:</label>
+            <input type="number" id="price" className="form-control" name="price" value={producto.price} onChange={handleChange} required />
           </div>
           <div className="col-md-6">
-            <label className="form-label">Stock:</label>
-            <input type="number" className="form-control" name="stock" value={producto.stock} onChange={handleChange} required />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Código Producto:</label>
-            <input type="text" className="form-control" name="codigo" value={producto.codigo} onChange={handleChange} required />
-          </div>
-          <div className="col-md-6">
-            <label className="form-label">Estado:</label>
-            <select className="form-control" name="estado" value={producto.estado} onChange={handleChange} required>
-              <option value="">Seleccione...</option>
-              <option value="Disponible">Disponible</option>
-              <option value="Agotado">Agotado</option>
-            </select>
+            <label htmlFor="stock" className="form-label">Stock:</label>
+            <input type="number" id="stock" className="form-control" name="stock" value={producto.stock} onChange={handleChange} required />
           </div>
           <div className="col-12 text-center">
             <button type="submit" className="btn btn-success mt-3">Registrar Producto</button>
