@@ -37,10 +37,10 @@ jobs:
       run: npm run build
       
     - name: Deploy to SFTP
-      uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
          username: bbb7d2251d71441db5657b5d02376173
          server: us-east-1.sftpcloud.io
          password: eabCHQ260XWZmgTM5aHal1k1GDYPaqV5  # Descomenta si usas contraseña
-         local_path: './dist/*'  # Sube el compilado dist
-         remote_path: './frontend/' 
+         local-dir: ./dist/*  # Sube el compilado dist
+         server-dir: ./frontend/'
