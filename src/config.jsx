@@ -1,5 +1,5 @@
 const config = {
-    apiUrl: "https://api.example.com",
+    apiUrl: "http://localhost:8800/api",
     appName: "MyReactApp"
   };
   
